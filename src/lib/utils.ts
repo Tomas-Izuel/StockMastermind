@@ -52,3 +52,25 @@ export function convertURLSearchParamsToCommonSearchParams(
 
   return params;
 }
+
+type InputObject = { [key: string]: string };
+
+type OutputObject = {
+  sale_price: number;
+  article_id: number;
+};
+
+export function transformObject(input: InputObject): OutputObject[] {
+  const output: OutputObject[] = [];
+
+  Object.keys(input).forEach((key) => {
+    const match = key.match(/^price-(\d+)$/);
+    if (match) {
+      const article_id = Number(match[1]);
+      const sale_price = Number(input[key]);
+      output.push({ sale_price, article_id });
+    }
+  });
+
+  return output;
+}

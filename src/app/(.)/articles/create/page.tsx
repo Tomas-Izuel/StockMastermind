@@ -1,4 +1,4 @@
-import CreateArticleForm from "@/components/clients/CreateArticleForm";
+import CreateArticleForm from "@/components/article/CreateArticleForm";
 import { getAllFamilyCategories } from "@/services/family.service";
 
 const CreateArticle = async () => {
