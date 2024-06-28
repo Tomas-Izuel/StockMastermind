@@ -26,7 +26,8 @@ const CreateOrderForm: FC<CreateOrderFormProps> = ({ providers }) => {
   const { push } = useRouter();
 
   const onSubmit = async (data: any) => {
-    const response = await fetch("/order", {
+    console.log(data);
+    const response = await fetch("/api/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
