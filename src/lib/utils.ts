@@ -74,3 +74,30 @@ export function transformObject(input: InputObject): OutputObject[] {
 
   return output;
 }
+
+type Article = {
+  article_id: number;
+  quantity: number;
+};
+
+export function transformSale(data: any) {
+  let transformedData = {
+    date: new Date(),
+    client_id: parseInt(data.client_id, 10),
+    articles: [] as Article[],
+  };
+
+  let i = 0;
+  while (
+    data[`article-${i}`] !== undefined &&
+    data[`quantity-${i}`] !== undefined
+  ) {
+    transformedData.articles.push({
+      article_id: parseInt(data[`article-${i}`], 10),
+      quantity: parseInt(data[`quantity-${i}`], 10),
+    });
+    i++;
+  }
+
+  return transformedData;
+}
