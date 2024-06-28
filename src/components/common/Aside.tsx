@@ -45,11 +45,11 @@ const Aside = () => {
             Proveedores
           </Button>
         </Link>
-        <Link href={"/clients"}>
+        <Link href={"/client"}>
           <Button
             variant="flat"
             className={
-              path === "/clients"
+              path === "/client"
                 ? "bg-gray-200 w-full flex justify-start text-lg"
                 : "w-full flex justify-start text-lg bg-transparent"
             }
