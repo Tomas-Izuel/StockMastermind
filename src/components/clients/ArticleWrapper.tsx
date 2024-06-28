@@ -1,5 +1,5 @@
 "use client";
-import { Article } from "@/types/clients";
+import { Article } from "@/types/article";
 import { FC } from "react";
 import {
   Table,
