@@ -71,7 +71,7 @@ const Aside = () => {
             Ventas
           </Button>
         </Link>
-        <Link href={"/orders"}>
+        <Link href={"/order"}>
           <Button
             variant="flat"
             className={
