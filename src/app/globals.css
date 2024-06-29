@@ -23,3 +23,7 @@ h3 {
 main {
   @apply bg-black text-white p-20 w-full h-screen rounded-l-[2rem];
 }
+
+.card-shadow-light {
+  box-shadow: #e5e5e5bd 4px 6px 0px, #4a4a4a 0px 7px 2px -3px;
+}
