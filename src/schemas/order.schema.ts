@@ -15,6 +15,7 @@ export const OrderSchema = z.object({
   total: z.number().nullable(),
   article_id: z.number().nullable(),
   provider_id: z.number().nullable(),
+  status_id: z.number().nullable(),
 });
 
 export const CreateOrderSchema = z.object({

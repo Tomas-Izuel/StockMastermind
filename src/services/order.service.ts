@@ -6,6 +6,7 @@ export const getAllOrders = async () => {
     cache: "no-cache",
   });
   const data = await response.json();
+  console.log(data)
   return OrderSchema.array().parse(data);
 };
 
@@ -22,6 +23,16 @@ export const createOrder = async (order: CreateOrder) => {
     body: JSON.stringify(newOrder),
   });
   const data = await response.json();
-  console.log(response);
   return OrderSchema.parse(data);
 };
+
+export const updateStatusQuantity = async (article_id:number,quantity:number,order_id: number) => {
+  const response = await fetch(`http://localhost:8080/order/update-stock/${article_id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ article_id,quantity, order_id }),
+  });
+  return response;
+}
