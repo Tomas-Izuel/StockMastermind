@@ -1,3 +1,4 @@
+import DemandHeader from "@/components/demand/DemandHeader";
 import DemandTable from "@/components/demand/DemandTable";
 import { getAllArticles } from "@/services/article.service";
 import { getAllDemands } from "@/services/demand.service";
@@ -9,13 +10,7 @@ const DemandPage = async () => {
   const articles = await getAllArticles();
   return (
     <main className=" flex flex-col gap-10">
-      <header className="flex justify-between items-center">
-        <h1>Demanda general</h1>
-
-        <Button color="primary">
-          <PlusCircleIcon className="w-6 h-6" /> Calcular demanda
-        </Button>
-      </header>
+      <DemandHeader articles={articles} />
       <DemandTable demands={demands} articles={articles} />
     </main>
   );

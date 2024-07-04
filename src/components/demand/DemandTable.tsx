@@ -34,9 +34,9 @@ interface DemandTableProps {
 
 const DemandTable: FC<DemandTableProps> = ({ demands, articles }) => {
   // Selecciona dos artículos aleatorios
-  const [randomArticle1, randomArticle2] = useMemo(() => {
+  const [randomArticle1, randomArticle2, randomArticle3, randomArticle4] = useMemo(() => {
     const shuffled = [...articles].sort(() => 0.5 - Math.random());
-    return [shuffled[0], shuffled[1]];
+    return [shuffled[0], shuffled[1], shuffled[2], shuffled[3]];
   }, [articles]);
 
   // Filtra las demandas para los artículos aleatorios seleccionados
@@ -48,37 +48,34 @@ const DemandTable: FC<DemandTableProps> = ({ demands, articles }) => {
     (demand) => demand.article_id === randomArticle2.id
   );
 
-  // Prepara los datos para el primer gráfico de línea
-  const lineChartData1 = {
-    labels: filteredDemands1.map((demand) =>
-      format(new Date(demand.period), "dd/MM/yyyy")
+  const filteredDemands3 = demands.filter(
+    (demand) => demand.article_id === randomArticle3.id
+  );
+
+  const filteredDemands4 = demands.filter(
+    (demand) => demand.article_id === randomArticle4.id
+  );
+
+  // Prepara los datos para los gráficos de línea
+  const createLineChartData = (article: any, filteredDemands: any) => ({
+    labels: filteredDemands.map((demand:any) =>
+      format(new Date(demand.periods || 2), "dd/MM/yyyy")
     ), // Usando 'period' como etiquetas
     datasets: [
       {
-        label: randomArticle1.name,
-        data: filteredDemands1.map((demand) => demand.quantity_demand),
+        label: article.name,
+        data: filteredDemands.map((demand:any) => demand.quantity_demand),
         borderColor: "rgba(75, 192, 192, 1)",
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         fill: true,
       },
     ],
-  };
+  });
 
-  // Prepara los datos para el segundo gráfico de línea
-  const lineChartData2 = {
-    labels: filteredDemands2.map((demand) =>
-      format(new Date(demand.period), "dd/MM/yyyy")
-    ), // Usando 'period' como etiquetas
-    datasets: [
-      {
-        label: randomArticle2.name,
-        data: filteredDemands2.map((demand) => demand.quantity_demand),
-        borderColor: "rgba(153, 102, 255, 1)",
-        backgroundColor: "rgba(153, 102, 255, 0.2)",
-        fill: true,
-      },
-    ],
-  };
+  const lineChartData1 = createLineChartData(randomArticle1, filteredDemands1);
+  const lineChartData2 = createLineChartData(randomArticle2, filteredDemands2);
+  const lineChartData3 = createLineChartData(randomArticle3, filteredDemands3);
+  const lineChartData4 = createLineChartData(randomArticle4, filteredDemands4);
 
   const pieChartData = {
     datasets: [
@@ -105,15 +102,21 @@ const DemandTable: FC<DemandTableProps> = ({ demands, articles }) => {
 
   return (
     <section className="flex gap-5 justify-between">
-      <div className="h-[30rem] w-5/6 p-2 card-shadow-light bg-white rounded-xl">
+      <div className="h-[30rem] w-1/2 p-2 card-shadow-light bg-white rounded-xl">
         <Pie data={pieChartData} />
       </div>
-      <article className="flex flex-col h-[30rem] w-full justify-between items-center gap-5">
+      <article className="grid grid-cols-2 gap-5 h-[30rem] w-1/2">
         <div className="h-[14rem] w-full p-2 card-shadow-light bg-white rounded-xl">
           <Line data={lineChartData1} />
         </div>
         <div className="h-[14rem] w-full p-2 card-shadow-light bg-white rounded-xl">
           <Line data={lineChartData2} />
+        </div>
+        <div className="h-[14rem] w-full p-2 card-shadow-light bg-white rounded-xl">
+          <Line data={lineChartData3} />
+        </div>
+        <div className="h-[14rem] w-full p-2 card-shadow-light bg-white rounded-xl">
+          <Line data={lineChartData4} />
         </div>
       </article>
     </section>
