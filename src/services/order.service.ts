@@ -25,3 +25,14 @@ export const createOrder = async (order: CreateOrder) => {
   console.log(response);
   return OrderSchema.parse(data);
 };
+
+export const updateStatusQuantity = async (article_id:number,quantity:number,order_id: number) => {
+  const response = await fetch(`http://localhost:8080/order/update-stock/${article_id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ article_id,quantity, order_id }),
+  });
+  return response;
+}

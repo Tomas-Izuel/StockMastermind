@@ -5,8 +5,7 @@ export const getAllSales = async () => {
     cache: "no-cache",
   });
   const data = await response.json();
-  const sales = SaleSchema.array().parse(data);
-  return sales;
+  return data;
 };
 
 export const createSale = async (sale: any) => {
